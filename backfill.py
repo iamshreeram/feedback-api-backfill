@@ -1,8 +1,8 @@
 # Copyright (C) 2015 Twitter, Inc.
 
-import requests
 import json
 import time
+import requests
 from requests_oauthlib import OAuth1
 
 import config
@@ -54,7 +54,6 @@ def get_events(from_time, to_time, next_cursor=None):
 		next_cursor = response_body.get('next_cursor', None)
 		if next_cursor is not None:
 
-			print type(next_cursor)
 			# request next page of events
 			time.sleep(config.FEEDBACK_API_SLEEP)
 			
@@ -84,11 +83,17 @@ def post_to_webhooks(feedback_event):
 
 		print 'Sending POST request to webhook %s: %s' % (webhook_name, webhook_url)
 		time.sleep(config.WEBHOOK_SLEEP)
-		req = requests.post(url=webhook_url, json=json.dumps(feedback_event), headers={ 'content-type': 'application/json' })
 		
-		# handle webhook response
-		print 'Webhook response code: %s' % req.status_code
-
+		try:
+			req = requests.post(url=webhook_url, json=json.dumps(feedback_event), headers={ 'content-type': 'application/json' })
+			
+			# handle webhook response
+			print 'Webhook response code: %s' % req.status_code
+		
+		except requests.ConnectionError:
+			# handle connection error
+			print 'Cannot connect to webhook %s: %s' % (webhook_name, webhook_url)
+		
 
 if __name__ == '__main__':
 	get_events(from_time=config.START_TIME, to_time=config.END_TIME)
