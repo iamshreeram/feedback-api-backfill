@@ -12,6 +12,8 @@ The Feedback API is a whitelisted API. Contact your Twitter account manager for 
 
 - Ensure your webhook endopoint can handle duplicate events. If for some reason the script fails, you may need to re-run the script.
 
+- If your webhook endpoint requires authentication you may need to modify the webhook request.
+
 ## Running the script
 
 1. Install python dependencies.
