@@ -2,7 +2,7 @@
 
 This python script will backfill Feedback API events. Event data is requested from GET feedback/events.json and then individual events are posted to existing webhook endpoint URLs.
 
-The Feedback API is whitelisted API. Contact your Twitter account manager for details.
+The Feedback API is a whitelisted API. Contact your Twitter account manager for details.
 
 ## Before you start
 
