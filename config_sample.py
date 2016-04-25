@@ -19,10 +19,10 @@ WEBHOOKS_CONFIGS = [{
 
 # Time in seconds to sleep between requests
 FEEDBACK_API_SLEEP = 0.75 # stays within 1000/15 min rate limit
-WEBHOOK_SLEEP = 1
+WEBHOOK_SLEEP = 0.25
 
 # Max number of events recevied from each feedback API request
-EVENTS_PAGE_COUNT = 2;
+EVENTS_PAGE_COUNT = 100;
 
 # Epoch timestamp in milliseconds
 START_TIME = 1451635200000
