@@ -37,7 +37,8 @@ def get_events(from_time, to_time, next_cursor=None):
 	params = {
 		'from_time': from_time,
 		'to_time': to_time,
-		'count': config.EVENTS_PAGE_COUNT
+		'count': config.EVENTS_PAGE_COUNT,
+		'cursor': next_cursor
 	}
 
 	req = requests.get(url=config.API_URL, params=params, headers={ 'content-type': 'application/json' }, auth=get_oauth())
@@ -85,7 +86,7 @@ def post_to_webhooks(feedback_event):
 		time.sleep(config.WEBHOOK_SLEEP)
 		
 		try:
-			req = requests.post(url=webhook_url, json=json.dumps(feedback_event), headers={ 'content-type': 'application/json' })
+			req = requests.post(url=webhook_url, json=feedback_event, headers={ 'content-type': 'application/json' })
 			
 			# handle webhook response
 			print 'Webhook response code: %s' % req.status_code
